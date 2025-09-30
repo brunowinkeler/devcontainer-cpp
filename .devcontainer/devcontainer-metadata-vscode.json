@@ -1,0 +1,35 @@
+{
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "llvm-vs-code-extensions.vscode-clangd@0.2.0",
+        "marus25.cortex-debug@1.12.1",
+        "mhutchie.git-graph@1.30.0",
+        "ms-vscode.cmake-tools@1.21.36",
+        "ms-vscode.cpptools@1.27.7",
+        "ms-vsliveshare.vsliveshare@1.0.5959",
+        "sonarsource.sonarlint-vscode@4.31.0"
+      ],
+      "settings": {
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "clangd.arguments": [
+          "--query-driver=/opt/**/arm-none-eabi-*",
+          "--compile-commands-dir=${userHome}/.amp"
+        ],
+        "cmake.copyCompileCommands": "${userHome}/.amp/compile_commands.json",
+        "cortex-debug.gdbPath": "gdb-multiarch",
+        "cortex-debug.objdumpPath": "arm-none-eabi-objdump",
+        "sonarlint.pathToCompileCommands": "/root/.amp/compile_commands.json",
+        "[c]": {
+          "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+        },
+        "[cpp]": {
+          "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+        }
+      }
+    }
+  }
+}

@@ -1,2 +1,0 @@
-# devcontainer-cpp
-My devcontainer

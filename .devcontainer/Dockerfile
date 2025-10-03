@@ -27,8 +27,8 @@ ENV CCACHE_DIR=/cache/.ccache \
 
 # Install the base system with all tool dependencies
 # hadolint ignore=DL3008
-RUN --mount=type=bind,source=.devcontainer/cpp/apt-requirements-base.json,target=/tmp/apt-requirements-base.json \
-    --mount=type=bind,source=.devcontainer/cpp/requirements.txt,target=/tmp/requirements.txt \
+RUN --mount=type=bind,source=.devcontainer/apt-requirements-base.json,target=/tmp/apt-requirements-base.json \
+    --mount=type=bind,source=.devcontainer/requirements.txt,target=/tmp/requirements.txt \
     --mount=type=cache,target=/cache,sharing=locked \
     --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -36,7 +36,7 @@ RUN --mount=type=bind,source=.devcontainer/cpp/apt-requirements-base.json,target
     apt-get update && apt-get install -y --no-install-recommends jq \
     && jq -r 'to_entries | .[] | .key + "=" + .value' /tmp/apt-requirements-base.json | \
     xargs apt-get install -y --no-install-recommends \
-    # Include the Cisco Umbrella PKI Root
+     # Include the Cisco Umbrella PKI Root
     && wget --no-hsts -qO /usr/local/share/ca-certificates/Cisco_Umbrella_Root_CA.crt https://www.cisco.com/security/pki/certs/ciscoumbrellaroot.pem \
     && update-ca-certificates \
     # Install some tools via pip to get more recent versions, clean up afterwards
@@ -45,7 +45,7 @@ RUN --mount=type=bind,source=.devcontainer/cpp/apt-requirements-base.json,target
     && rm -rf "$(pip cache dir)"
 
 # Install clang toolchain and mull mutation testing framework
-RUN --mount=type=bind,source=.devcontainer/cpp/apt-requirements-clang.json,target=/tmp/apt-requirements-clang.json \
+RUN --mount=type=bind,source=.devcontainer/apt-requirements-clang.json,target=/tmp/apt-requirements-clang.json \
     --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     --mount=type=cache,target=/var/log,sharing=locked \
@@ -105,4 +105,9 @@ RUN --mount=type=cache,target=/cache,sharing=locked \
 
 RUN \
     # Install Windows SDK/CRT
-    xwin --accept-license --temp --sdk-version "${WINDOWS_SDK_VERSION}"  --crt-version "${MSVC_CRT_VERSION}" --timeout 120 splat --include-debug-libs --preserve-ms-arch-notation --output /winsdk
+    apt-get update \
+    && apt-get install --reinstall -y ca-certificates \
+    && update-ca-certificates \
+    && curl -v https://aka.ms/vs/17/release/channel \
+    && xwin --accept-license --temp --sdk-version "${WINDOWS_SDK_VERSION}"  --crt-version "${MSVC_CRT_VERSION}" --timeout 120 splat --include-debug-libs --preserve-ms-arch-notation --output /winsdk \
+    && rm -rf /var/lib/apt/lists/*          

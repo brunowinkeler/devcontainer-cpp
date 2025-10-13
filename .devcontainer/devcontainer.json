@@ -1,41 +1,35 @@
 {
-    "name": "C++ General Purpose Devcontainer",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
-    },
-    "forwardPorts": [
-        6080
-    ],
-    "remoteEnv": {
-        "CONTAINER_FLAVOR": "cpp",
-        "NODE_EXTRA_CA_CERTS": "/usr/local/share/ca-certificates/Cisco_Umbrella_Root_CA.crt"
-    },
-    "features": {
-        "ghcr.io/devcontainers/features/desktop-lite:": {},
-        "ghcr.io/devcontainers/features/node:1": {}
-    },
-    "postCreateCommand": "npm install && npx playwright install --with-deps",
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "files.insertFinalNewline": true,
-                "editor.formatOnSave": true,
-                "editor.tabSize": 4,
-                "files.trimTrailingWhitespace": true,
-                "C_Cpp.intelliSenseEngine": "Disabled",
-                "C_Cpp.formatting": "clangFormat",
-                "clangd.path": "/usr/bin/clangd"
-            },
-            "extensions": [
-                "github.copilot",
-                "mhutchie.git-graph",
-                "ms-azuretools.vscode-docker",
-                "ms-vscode.cmake-tools",
-                "ms-vscode.cpptools",
-                "llvm-vs-code-extensions.vscode-clangd",
-                "usernamehw.errorlens"
-            ]
-        }
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "forwardPorts": [
+    6080
+  ],
+  "remoteEnv": {
+    "CONTAINER_FLAVOR": "cpp",
+    "NODE_EXTRA_CA_CERTS": "/usr/local/share/ca-certificates/Cisco_Umbrella_Root_CA.crt"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:": {},
+    "ghcr.io/devcontainers/features/github-cli:": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+      },
+      "extensions": [
+        "github.copilot@1.372.0",
+        "github.vscode-github-actions@0.27.2",
+        "github.vscode-pull-request-github@0.118.1",
+        "mhutchie.git-graph@1.30.0",
+        "ms-azuretools.vscode-docker@2.0.0",
+        "ms-vscode.cmake-tools@1.21.36",
+        "ms-vscode.cpptools@1.27.7",
+        "usernamehw.errorlens@3.26.0"
+      ]
     }
+  }
 }

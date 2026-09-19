@@ -6,7 +6,9 @@ A batteries-included C++ dev container for the three things I actually build:
 - **embedded firmware** — Arm GNU Toolchain, OpenOCD, probe-rs, QEMU and serial tooling;
 - **Windows builds from Linux** — mingw-w64 cross compilation producing a single static `.exe`.
 
-The full inventory, with versions and rationale, lives in [docs/TOOLS.md](docs/TOOLS.md).
+[docs/USAGE.md](docs/USAGE.md) is the walkthrough: starting a project, what arrives for free,
+and how to wire the `cmake/` templates. [docs/TOOLS.md](docs/TOOLS.md) is the full inventory
+with versions and rationale.
 
 ## Using it in a project
 

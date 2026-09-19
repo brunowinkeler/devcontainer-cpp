@@ -1,31 +1,82 @@
 {
+  "name": "C++ (desktop, graphics and embedded)",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
   },
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1.2.10": {},
+    "ghcr.io/devcontainers/features/github-cli:1.1.2": {}
+  },
   "forwardPorts": [
+    5901,
     6080
   ],
+  "portsAttributes": {
+    "5901": {
+      "label": "VNC",
+      "onAutoForward": "silent"
+    },
+    "6080": {
+      "label": "noVNC (desktop in the browser)",
+      "onAutoForward": "notify"
+    }
+  },
   "remoteEnv": {
     "CONTAINER_FLAVOR": "cpp",
-    "NODE_EXTRA_CA_CERTS": "/usr/local/share/ca-certificates/Cisco_Umbrella_Root_CA.crt"
-  },
-  "features": {
-    "ghcr.io/devcontainers/features/desktop-lite:": {},
-    "ghcr.io/devcontainers/features/github-cli:": {}
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
   },
   "customizations": {
     "vscode": {
       "settings": {
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "clangd.arguments": [
+          "--compile-commands-dir=${userHome}/.cppdev",
+          "--query-driver=/usr/bin/gcc-15,/usr/bin/g++-15,/usr/lib/llvm-22/bin/clang*,/opt/gcc-arm-none-eabi/bin/arm-none-eabi-*,/usr/bin/x86_64-w64-mingw32-*",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=never"
+        ],
+        "cmake.copyCompileCommands": "${userHome}/.cppdev/compile_commands.json",
+        "cmake.useCMakePresets": "always",
+        "cortex-debug.gdbPath": "gdb-multiarch",
+        "cortex-debug.objdumpPath": "arm-none-eabi-objdump",
+        "cortex-debug.openocdPath": "openocd",
+        "[c]": {
+          "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+        },
+        "[cpp]": {
+          "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+        },
         "files.insertFinalNewline": true,
         "files.trimTrailingWhitespace": true
       },
       "extensions": [
-        "github.copilot@1.372.0",
+        "llvm-vs-code-extensions.vscode-clangd@0.6.0",
+        "ms-vscode.cpptools@1.34.4",
+        "ms-vscode.cmake-tools@1.24.42",
+        "twxs.cmake@0.0.17",
+        "ms-vscode.makefile-tools@0.12.17",
+        "usernamehw.errorlens@3.28.0",
+        "ms-vscode.hexeditor@1.11.1",
+        "matepek.vscode-catch2-test-adapter@4.26.0",
+        "hediet.debug-visualizer@2.4.0",
+        "marus25.cortex-debug@1.12.1",
+        "mcu-debug.debug-tracker-vscode@0.0.15",
+        "mcu-debug.memory-view@0.0.29",
+        "mcu-debug.peripheral-viewer@1.6.4",
+        "mcu-debug.rtos-views@0.0.16",
+        "ms-vscode.vscode-serial-monitor@0.13.1",
+        "zixuanwang.linkerscript@1.0.4",
+        "dan-c-underwood.arm@1.7.4",
+        "trond-snekvik.gnu-mapfiles@1.1.0",
         "mhutchie.git-graph@1.30.0",
-        "ms-vscode.cmake-tools@1.21.36",
-        "ms-vscode.cpptools@1.27.7",
-        "usernamehw.errorlens@3.26.0"
+        "github.copilot@1.388.0",
+        "github.copilot-chat@0.48.1",
+        "github.vscode-github-actions@0.32.3",
+        "github.vscode-pull-request-github@0.166.1",
+        "ms-azuretools.vscode-docker@2.0.0",
+        "redhat.vscode-yaml@1.24.0"
       ]
     }
   }

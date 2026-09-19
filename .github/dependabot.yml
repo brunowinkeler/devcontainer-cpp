@@ -1,0 +1,32 @@
+# Dependabot cannot see the apt pins in apt-requirements-*.json nor the binary versions
+# pinned as Dockerfile ARGs (ccache, probe-rs, Arm GNU Toolchain, CPM). Those are updated by
+# hand; see the "Updating pinned versions" section in README.md.
+
+version: 2
+updates:
+  # Features pinned in .devcontainer/devcontainer.json
+  - package-ecosystem: devcontainers
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  # Digest-pinned ubuntu base image in .devcontainer/Dockerfile
+  - package-ecosystem: docker
+    directory: /.devcontainer
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  # cmake, conan and gcovr in .devcontainer/requirements.in
+  - package-ecosystem: pip
+    directory: /.devcontainer
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5

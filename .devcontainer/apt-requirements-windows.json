@@ -1,0 +1,10 @@
+{
+  "binutils-mingw-w64-x86-64": "2.45.90.20260125-1ubuntu1+13.3",
+  "g++-mingw-w64-x86-64-posix": "13.2.0-6ubuntu1+26.1",
+  "gcc-mingw-w64-base": "13.2.0-6ubuntu1+26.1",
+  "gcc-mingw-w64-x86-64-posix": "13.2.0-6ubuntu1+26.1",
+  "gcc-mingw-w64-x86-64-posix-runtime": "13.2.0-6ubuntu1+26.1",
+  "mingw-w64-common": "13.0.0-2ubuntu1",
+  "mingw-w64-tools": "13.0.0-2ubuntu1",
+  "mingw-w64-x86-64-dev": "13.0.0-2ubuntu1"
+}

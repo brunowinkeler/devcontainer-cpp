@@ -1,0 +1,11 @@
+{
+  "dfu-util": "0.11-3build1",
+  "libncurses-dev": "6.6+20251231-1",
+  "minicom": "2.10-1ubuntu1",
+  "openocd": "0.12.0-3build3",
+  "picocom": "3.1-4build1",
+  "qemu-system-arm": "1:10.2.1+ds-1ubuntu3.2",
+  "socat": "1.8.1.1-1ubuntu0.1",
+  "srecord": "1.64-4.1build2",
+  "usbutils": "1:019-1"
+}

@@ -1,0 +1,6 @@
+# Heredocs in the Dockerfile and shell scripts break with CRLF line endings.
+* text=auto eol=lf
+*.cmake text eol=lf
+Dockerfile text eol=lf
+*.sh text eol=lf
+*.bats text eol=lf

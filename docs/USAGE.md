@@ -242,12 +242,14 @@ GPU. For headless runs, `xvfb-run -a ./my-app`.
 
 ---
 
-## 6. Worked example
+## 6. Worked examples
 
-The `devcontainer-cpp-example` project next to this repository is a complete, minimal
-project built exactly this way: a terminal app with no external dependencies that builds for
-Linux with GCC and Clang, cross compiles to a static Windows `.exe`, runs CTest on the host
-only, and debugs with `gdb`. Its layout:
+Two complete projects sit next to this repository, both built exactly the way described above
+and both free of external dependencies.
+
+**`devcontainer-cpp-example`** — a terminal application that builds for Linux with GCC and
+Clang, cross compiles to a static Windows `.exe`, runs CTest on the host only, and debugs with
+`gdb`:
 
 ```
 devcontainer-cpp-example/
@@ -256,6 +258,23 @@ devcontainer-cpp-example/
 ├── cmake/                  toolchain-windows-mingw.cmake, copied from this repo
 ├── src/                    build_info.{hpp,cpp}, sieve.{hpp,cpp}, main.cpp
 ├── tests/test_sieve.cpp    plain assertions, no test framework
+├── CMakeLists.txt
+└── CMakePresets.json
+```
+
+**`devcontainer-cpp-embedded-example`** — bare-metal firmware for the STM32F4DISCOVERY, with
+no HAL, CMSIS or SDK. It links against a custom linker script, emits `.bin`/`.hex`, flashes
+through OpenOCD and debugs with Cortex-Debug. `test/verify.sh` asserts the reset vector and
+stack top so the image is validated without the board:
+
+```
+devcontainer-cpp-embedded-example/
+├── .devcontainer/          Dockerfile (2 lines) + devcontainer.json
+├── .vscode/launch.json     cortex-debug over OpenOCD and QEMU
+├── cmake/                  toolchain-arm-none-eabi.cmake, copied from this repo
+├── linker/stm32f407vg.ld   memory map and sections
+├── src/                    startup.cpp, registers.hpp, board.{hpp,cpp}, main.cpp
+├── test/verify.sh          checks the image without hardware
 ├── CMakeLists.txt
 └── CMakePresets.json
 ```

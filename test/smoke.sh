@@ -63,3 +63,43 @@ echo "=== CPM + conan ==="
 ls /usr/local/lib/python*/dist-packages/cmake/data/share/cmake-*/Modules/CPM.cmake
 grep -A1 '\[conf\]' /opt/conan/profiles/default
 cat /root/.cppdev/compile_commands.json
+
+echo
+echo "=== tool inventory ==="
+inventory="$(dirname "${BASH_SOURCE[0]}")/tool-inventory.json"
+missing=0
+
+while read -r tool; do
+  # Package names rarely match the binary they install.
+  case "${tool}" in
+  arm-gnu-toolchain) binary=arm-none-eabi-gcc ;;
+  binutils-mingw-w64-x86-64) binary=x86_64-w64-mingw32-objdump ;;
+  clang-tools-22) binary=scan-build ;;
+  clang-22 | clang-format-22 | clang-tidy-22 | clangd-22) binary="${tool%-22}" ;;
+  g++-15) binary=g++ ;;
+  g++-mingw-w64-x86-64-posix) binary=x86_64-w64-mingw32-g++ ;;
+  gcc-mingw-w64-x86-64-posix) binary=x86_64-w64-mingw32-gcc ;;
+  lld-22) binary=ld.lld ;;
+  llvm-22) binary=llvm-objdump ;;
+  mesa-utils) binary=glxinfo ;;
+  ninja-build) binary=ninja ;;
+  pkgconf) binary=pkg-config ;;
+  srecord) binary=srec_cat ;;
+  usbutils) binary=lsusb ;;
+  xvfb) binary=Xvfb ;;
+  *) binary="${tool}" ;;
+  esac
+
+  if ! command -v "${binary}" >/dev/null 2>&1; then
+    printf '  %-28s MISSING (looked for %s)\n' "${tool}" "${binary}"
+    missing=$((missing + 1))
+  fi
+done < <(jq -r '.[]' "${inventory}")
+
+if [ "${missing}" -eq 0 ]; then
+  printf '  all %s tools present\n' "$(jq -r 'length' "${inventory}")"
+else
+  printf '  %s tool(s) missing\n' "${missing}"
+fi
+
+exit "${missing}"

@@ -140,7 +140,9 @@ docker run --rm -v "$PWD:/w" -w /w devcontainer-cpp:local bash test/smoke.sh
 docker run --rm -v "$PWD:/w" -w /w devcontainer-cpp:local bash test/presets.sh
 ```
 
-`smoke.sh` reports every tool version and compiles for all three targets.
+`smoke.sh` reports every tool version, compiles for all three targets, and asserts that every
+tool listed in [test/tool-inventory.json](test/tool-inventory.json) is actually on `PATH` —
+it exits non-zero otherwise, so CI never publishes an image that silently lost a tool.
 `presets.sh` configures and builds [test/workspace](test/workspace) with each shipped preset
 and checks that the produced binaries are really ELF, PE32+ and ARM ELF.
 
@@ -155,6 +157,9 @@ Everything is pinned on purpose. To bump:
 - **Binaries** (ccache, CPM, probe-rs, Arm GNU Toolchain) — edit the `ARG`s at the top of the
   Dockerfile together with their `--checksum=sha256:` values.
 - **Extensions and features** — edit `.devcontainer/devcontainer.json`.
+
+When you add or remove a tool, update [test/tool-inventory.json](test/tool-inventory.json) too;
+`smoke.sh` maps package names to binaries there when the two differ.
 
 Then rebuild, update [docs/TOOLS.md](docs/TOOLS.md), add a [CHANGELOG.md](CHANGELOG.md)
 entry and tag the release.

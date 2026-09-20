@@ -10,6 +10,12 @@ A batteries-included C++ dev container for the three things I actually build:
 and how to wire the `cmake/` templates. [docs/TOOLS.md](docs/TOOLS.md) is the full inventory
 with versions and rationale.
 
+Two ready-made projects show it in use:
+[devcontainer-cpp-example](https://github.com/brunowinkeler/devcontainer-cpp-example) — a
+terminal app that builds for Linux and cross compiles to a static Windows `.exe` — and
+[devcontainer-cpp-embedded-example](https://github.com/brunowinkeler/devcontainer-cpp-embedded-example)
+— bare-metal firmware for the STM32F4DISCOVERY.
+
 ## Using it in a project
 
 Create `.devcontainer/Dockerfile`:

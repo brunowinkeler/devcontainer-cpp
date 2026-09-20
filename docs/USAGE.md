@@ -244,12 +244,12 @@ GPU. For headless runs, `xvfb-run -a ./my-app`.
 
 ## 6. Worked examples
 
-Two complete projects sit next to this repository, both built exactly the way described above
-and both free of external dependencies.
+Two complete projects, both built exactly the way described above and both free of external
+dependencies.
 
-**`devcontainer-cpp-example`** — a terminal application that builds for Linux with GCC and
-Clang, cross compiles to a static Windows `.exe`, runs CTest on the host only, and debugs with
-`gdb`:
+**[devcontainer-cpp-example](https://github.com/brunowinkeler/devcontainer-cpp-example)** — a
+terminal application that builds for Linux with GCC and Clang, cross compiles to a static
+Windows `.exe`, runs CTest on the host only, and debugs with `gdb`:
 
 ```
 devcontainer-cpp-example/
@@ -262,10 +262,11 @@ devcontainer-cpp-example/
 └── CMakePresets.json
 ```
 
-**`devcontainer-cpp-embedded-example`** — bare-metal firmware for the STM32F4DISCOVERY, with
-no HAL, CMSIS or SDK. It links against a custom linker script, emits `.bin`/`.hex`, flashes
-through OpenOCD and debugs with Cortex-Debug. `test/verify.sh` asserts the reset vector and
-stack top so the image is validated without the board:
+**[devcontainer-cpp-embedded-example](https://github.com/brunowinkeler/devcontainer-cpp-embedded-example)**
+— bare-metal firmware for the STM32F4DISCOVERY, with no HAL, CMSIS or SDK. It links against a
+custom linker script, emits `.bin`/`.hex`, flashes through OpenOCD and debugs with
+Cortex-Debug. `test/verify.sh` asserts the reset vector and stack top so the image is
+validated without the board:
 
 ```
 devcontainer-cpp-embedded-example/

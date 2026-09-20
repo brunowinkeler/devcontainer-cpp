@@ -9,24 +9,30 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    groups:
+      devcontainer-features:
+        patterns: ["*"]
 
   # Digest-pinned ubuntu base image in .devcontainer/Dockerfile
   - package-ecosystem: docker
     directory: /.devcontainer
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
 
   # cmake, conan and gcovr in .devcontainer/requirements.in
   - package-ecosystem: pip
     directory: /.devcontainer
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    groups:
+      python-tools:
+        patterns: ["*"]
 
+  # Grouped so a week of action bumps arrives as one pull request, not one per action.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns: ["*"]

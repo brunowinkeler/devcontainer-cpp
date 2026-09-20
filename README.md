@@ -164,3 +164,7 @@ When you add or remove a tool, update [test/tool-inventory.json](test/tool-inven
 Then rebuild, update [docs/TOOLS.md](docs/TOOLS.md), add a [CHANGELOG.md](CHANGELOG.md)
 entry and tag the release.
 
+Dependabot covers what it can see — the features, the base image digest, the Python tools and
+the workflow actions — opening one grouped pull request per ecosystem each week. Patch and
+minor bumps merge themselves once the `build` check passes; major bumps wait for you.
+
